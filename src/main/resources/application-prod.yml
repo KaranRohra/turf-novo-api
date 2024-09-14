@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Turf Novo
+  datasource:
+    url: jdbc:postgresql://turf-novo-prod.postgres.database.azure.com/turf_novo
+    username: turf_novo_user
+    password: ${TURF_NOVO_DB_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: create-drop
+    generate-ddl: true
+turfnovo:
+  app:
+    jwtSecret: ${TURF_NOVO_JWT_SECRET}

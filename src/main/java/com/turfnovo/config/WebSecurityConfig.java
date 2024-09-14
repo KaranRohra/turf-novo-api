@@ -65,7 +65,8 @@ public class WebSecurityConfig {
                 ApiPathConstants.SWAGGER_WEB_JARS,
                 ApiPathConstants.SWAGGER_UI,
                 ApiPathConstants.SWAGGER_API_DOCS_CONFIG,
-                ApiPathConstants.SWAGGER_API_DOCS)
+                ApiPathConstants.SWAGGER_API_DOCS,
+                ApiPathConstants.HELLO_WORLD)
             .permitAll()
             .requestMatchers(ApiPathConstants.TURF_OWNER + "/**")
             .hasAnyAuthority(UserRole.ROLE_TURF_OWNER.name(), UserRole.ROLE_ADMIN.name())

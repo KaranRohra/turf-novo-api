@@ -1,16 +1,3 @@
 spring:
-  application:
-    name: Turf Novo
-  datasource:
-    url: jdbc:postgresql://localhost:5433/turf_novo
-    username: turf_novo_user
-    password: T!_!RF-N0vO
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: create-drop
-    generate-ddl: true
-turfnovo:
-  app:
-    jwtSecret: pbGLwt+SucOaJIkGWHDpTt2kcA7XZE/k4JchIOzOH2Yb/PDq4DWjHDP6+hxwNWKNGwkU5XeK3+tagtJ1c8Eg1aZwGtRYxBPVRlpGvPVt18++tdbDdA8eSdSo2o4pUgVuHIK6Xd9tTr8HMo8rd9r3+LAEKkfRFRZf6789aKMd2KluDeVh8qu/w1OkvsJ6obRKEsIS/0k1VZjQMfMuPhoBSG2zcp14huuBB3O51PGnu8shQXIio8tmnKpPXy2z6IRuzZ/hUjGLYivVV+57BksbnWaVWMgAa1AqSEaEF9P95kx9bsfp9NW6esvekGmBleU5aaPwNMO6E3heDm962/NSKg==
+  profiles:
+    active: prod

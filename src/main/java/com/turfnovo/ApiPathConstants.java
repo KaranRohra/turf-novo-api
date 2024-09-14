@@ -1,6 +1,7 @@
 package com.turfnovo;
 
 public interface ApiPathConstants {
+    String HELLO_WORLD = "/hello";
     String BASE = "/api";
 
     // Auth

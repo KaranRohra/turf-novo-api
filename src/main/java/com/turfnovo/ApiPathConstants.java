@@ -15,7 +15,7 @@ public interface ApiPathConstants {
 
     // Turf
     String TURF_GET_ALL = ApiPathConstants.BASE + "/turfs";
-    String TURF_GET = ApiPathConstants.TURF_GET_ALL + "/{id}";
+    String TURF_GET_BY_ID = ApiPathConstants.TURF_GET_ALL + "/{id}";
 
     // Turf Owners
     String TURF_OWNER = ApiPathConstants.BASE + "/owner/turfs";

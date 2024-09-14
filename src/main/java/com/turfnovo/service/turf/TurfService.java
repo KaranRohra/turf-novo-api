@@ -41,7 +41,7 @@ public class TurfService {
         turf.setOwner(user);
         turf.setTurfTimeSlots(null);
         Turf savedTurf = turfRepository.save(turf);
-        savedTurf.setTurfTimeSlots(createOrUpdateTurfTimeSlots(savedTurf.getId(), turfRequestDto.getTurfTimeSlots()));
+        savedTurf.setTurfTimeSlots(createOrUpdateTurfTimeSlots(savedTurf, turfRequestDto.getTurfTimeSlots()));
 
         return modelMapper.map(savedTurf, TurfResponseDto.class);
     }
@@ -55,18 +55,7 @@ public class TurfService {
             throw new RuntimeException("Only turf owner can update the turf details");
         }
 
-        for (TurfTimeSlotRequestDto turfTimeSlotRequestDto : turfRequestDto.getTurfTimeSlots()) {
-            Long timeSlotId = turfTimeSlotRequestDto.getId();
-            TurfTimeSlot turfTimeSlot = timeSlotId == null ? null
-                    : turfTimeSlotRepository.findById(timeSlotId).orElse(null);
-
-            if (turfTimeSlot == null) {
-                turfTimeSlot = new TurfTimeSlot();
-                turfTimeSlot.setTurf(turf);
-            }
-            Utils.copyNonNullProperties(turfTimeSlotRequestDto, turfTimeSlot);
-            turfTimeSlotRepository.save(turfTimeSlot);
-        }
+        createOrUpdateTurfTimeSlots(turf, turfRequestDto.getTurfTimeSlots());
 
         turf = turfRepository.findById(turfId).orElse(null);
         turfRequestDto.setTurfTimeSlots(null);
@@ -75,9 +64,7 @@ public class TurfService {
         return modelMapper.map(turfRepository.save(turf), TurfResponseDto.class);
     }
 
-    public List<TurfTimeSlot> createOrUpdateTurfTimeSlots(Long turfId, List<TurfTimeSlotRequestDto> turfTimeSlots) {
-        Turf turf = turfRepository.findById(turfId).orElse(null);
-
+    public List<TurfTimeSlot> createOrUpdateTurfTimeSlots(Turf turf, List<TurfTimeSlotRequestDto> turfTimeSlots) {
         List<TurfTimeSlot> timeSlots = new ArrayList<>();
         for (TurfTimeSlotRequestDto ts : turfTimeSlots) {
             TurfTimeSlot turfTimeSlot = ts.getId() == null ? null
@@ -85,19 +72,17 @@ public class TurfService {
 
             if (turfTimeSlot == null) {
                 turfTimeSlot = new TurfTimeSlot();
+                turfTimeSlot.setTurf(turf);
             }
 
-            modelMapper.map(ts, turfTimeSlot);
-            turfTimeSlot.setTurf(turf);
-
+            Utils.copyNonNullProperties(ts, turfTimeSlot);
             timeSlots.add(turfTimeSlot);
         }
 
-        return timeSlots.stream().map(ts -> {
-            if (ts.getId() != null) {
-                return ts;
-            }
-            return turfTimeSlotRepository.save(ts);
-        }).toList();
+        return timeSlots.stream().map(ts -> turfTimeSlotRepository.save(ts)).toList();
+    }
+
+    public TurfResponseDto getTurfById(Long id) {
+        return turfRepository.findById(id).map(t -> modelMapper.map(t, TurfResponseDto.class)).orElse(null);
     }
 }

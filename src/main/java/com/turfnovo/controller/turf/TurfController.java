@@ -29,6 +29,11 @@ public class TurfController {
         return turfService.getTurfs();
     }
 
+    @GetMapping(ApiPathConstants.TURF_GET_BY_ID)
+    public TurfResponseDto getTurfByIdController(@PathVariable Long id) {
+        return turfService.getTurfById(id);
+    }
+
     @PostMapping(ApiPathConstants.TURF_CREATE)
     public TurfResponseDto createTurfController(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
             @Valid @RequestBody TurfRequestDto turfRequestDto) {

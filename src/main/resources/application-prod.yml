@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://turf-novo-prod.postgres.database.azure.com/turf_novo
     username: turf_novo_user
-    password: '${{ secrets.TURF_NOVO_USER_PASSWORD }}'
+    password: '${ secrets.TURF_NOVO_USER_PASSWORD }'
   jpa:
     properties:
       hibernate:
@@ -13,4 +13,4 @@ spring:
     generate-ddl: true
 turfnovo:
   app:
-    jwtSecret: '${{ secrets.TURF_NOVO_JWT_SECRET }}'
+    jwtSecret: '${ secrets.TURF_NOVO_JWT_SECRET }'

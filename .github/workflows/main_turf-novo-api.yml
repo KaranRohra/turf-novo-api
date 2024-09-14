@@ -42,9 +42,10 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact
+        uses: actions/download-artifact@v4
         with:
           name: java-app
+          path: ${{ runner.workspace }}/java-app
       
       - name: Login to Azure
         uses: azure/login@v2

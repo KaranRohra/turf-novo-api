@@ -3,6 +3,8 @@ package com.turfnovo.controller.turf;
 import java.util.List;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +46,18 @@ public class TurfController {
     public TurfResponseDto putMethodName(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
             @PathVariable Long id, @RequestBody TurfRequestDto turfRequestDto) {
         return turfService.updateTurf(authorization, id, turfRequestDto);
+    }
+
+    @GetMapping(ApiPathConstants.TURF_OWNER)
+    public List<TurfResponseDto> getTurfByOwnerController(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        return turfService.getTurfByOwner(authorization);
+    }
+
+    @DeleteMapping(ApiPathConstants.TURF_DELETE)
+    public ResponseEntity<String> deleteTurfController(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @PathVariable Long id) {
+        turfService.deleteTurf(authorization, id);
+        return ResponseEntity.ok().body("Turf deleted successfully");
     }
 }

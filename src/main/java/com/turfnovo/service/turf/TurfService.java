@@ -85,4 +85,23 @@ public class TurfService {
     public TurfResponseDto getTurfById(Long id) {
         return turfRepository.findById(id).map(t -> modelMapper.map(t, TurfResponseDto.class)).orElse(null);
     }
+
+    public void deleteTurf(String authorization, Long id) {
+        String email = jwtUtils.getUserNameFromJwtToken(authorization);
+        User user = userRepository.findByUsername(email).orElse(null);
+        Turf turf = turfRepository.findById(id).orElse(null);
+
+        if (turf == null || turf.getOwner().getId() != user.getId()) {
+            throw new RuntimeException("Only turf owner can delete the turf");
+        }
+
+        turfRepository.delete(turf);
+    }
+
+    public List<TurfResponseDto> getTurfByOwner(String authorization) {
+        String email = jwtUtils.getUserNameFromJwtToken(authorization);
+        User user = userRepository.findByUsername(email).orElse(null);
+
+        return turfRepository.findByOwner(user.getId()).stream().map(t -> modelMapper.map(t, TurfResponseDto.class)).toList();
+    }
 }

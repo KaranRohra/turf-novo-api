@@ -102,6 +102,6 @@ public class TurfService {
         String email = jwtUtils.getUserNameFromJwtToken(authorization);
         User user = userRepository.findByUsername(email).orElse(null);
 
-        return turfRepository.findByOwner(user.getId()).stream().map(t -> modelMapper.map(t, TurfResponseDto.class)).toList();
+        return turfRepository.findByOwner(user).stream().map(t -> modelMapper.map(t, TurfResponseDto.class)).toList();
     }
 }

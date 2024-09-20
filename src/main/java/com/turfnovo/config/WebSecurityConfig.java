@@ -40,6 +40,7 @@ public class WebSecurityConfig {
 
     authProvider.setUserDetailsService(userDetailsService);
     authProvider.setPasswordEncoder(passwordEncoder());
+    authProvider.setHideUserNotFoundExceptions(false);
 
     return authProvider;
   }

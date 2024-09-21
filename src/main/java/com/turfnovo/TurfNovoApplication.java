@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class TurfNovoApplication {
 
 	public static void main(String[] args) {
+		System.out.println("====================================");
+		System.out.println(System.getenv("TURFNOVO_DATASOURCE_USERNAME"));
+		System.out.println("====================================");
+
 		SpringApplication.run(TurfNovoApplication.class, args);
 	}
 

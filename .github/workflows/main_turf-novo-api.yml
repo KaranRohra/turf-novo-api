@@ -21,6 +21,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
+      - name: Print environment variables
+        run: echo "Secret env variable value is $TURFNOVO_DATASOURCE_PASSWORD"
+        env:
+          TURFNOVO_DATASOURCE_PASSWORD: ${{ secrets.TURFNOVO_DATASOURCE_PASSWORD }}
 
       - name: Build with Maven
         run: mvn clean install

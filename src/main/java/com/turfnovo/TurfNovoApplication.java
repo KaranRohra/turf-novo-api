@@ -15,7 +15,10 @@ public class TurfNovoApplication {
 
 	public static void main(String[] args) {
 		System.out.println("====================================");
+		System.out.println(System.getenv("TURFNOVO_DATASOURCE_URL").substring(0, 3));
 		System.out.println(System.getenv("TURFNOVO_DATASOURCE_USERNAME"));
+		System.out.println(System.getenv("TURFNOVO_DATASOURCE_PASSWORD").substring(0, 1));
+		System.out.println(System.getenv("TURFNOVO_APP_JWTSECRET").substring(0, 3));
 		System.out.println("====================================");
 
 		SpringApplication.run(TurfNovoApplication.class, args);

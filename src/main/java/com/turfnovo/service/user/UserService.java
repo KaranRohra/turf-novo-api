@@ -53,7 +53,7 @@ public class UserService {
 
     public User createUser(SignupRequestDto signupRequest) {
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            throw new RuntimeException("User already exit with email: " + signupRequest.getEmail());
+            throw new RuntimeException("User already exist with email: " + signupRequest.getEmail());
         }
         if (!Utils.isValidPhoneNumber(signupRequest.getPhoneNo())) {
             throw new RuntimeException("Invalid phone number: " + signupRequest.getPhoneNo());
